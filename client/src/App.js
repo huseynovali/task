@@ -11,31 +11,31 @@ import axios from 'axios';
 
 
 function App() {
-  
-  const token = JSON.parse(localStorage.getItem("token"));
-  const [user, setUser] = useState(token?.length > 0 ? true :false);
 
-    const [loading, setLoading] = useState(true); // Yüklenme durumu ekle
-  
-    useEffect(() => {
-   
-      const fetchData = async () => {
-        if (token) {
-          const res = await axios.post(
-            "http://localhost:5000/api/webuser/token",
-            { token }
-          );
-          setUser(res.data.message === "Success" ? true : false);
-        }
-        setLoading(false); // Yüklenme durumunu güncelle
-      };
-  
-      fetchData();
-    }, []);
-  
-    if (loading) {
-      return <div>Loading...</div>; // Yüklenme durumunda bekleyen bir bileşen göster
-    }
+  const token = JSON.parse(localStorage.getItem("token"));
+  const [user, setUser] = useState(token?.length > 0 ? true : false);
+
+  const [loading, setLoading] = useState(true); // Yüklenme durumu ekle
+
+  useEffect(() => {
+
+    const fetchData = async () => {
+      if (token) {
+        const res = await axios.post(
+          "http://localhost:5000/api/webuser/token",
+          { token }
+        );
+        setUser(res.data.message === "Success" ? true : false);
+      }
+      setLoading(false); // Yüklenme durumunu güncelle
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>; // Yüklenme durumunda bekleyen bir bileşen göster
+  }
   return (
     <Routes>
       <Route path="/" element={<Layout />} >

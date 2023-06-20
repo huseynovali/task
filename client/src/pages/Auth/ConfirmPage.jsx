@@ -1,8 +1,15 @@
 import axios from 'axios';
-
+import {
+    Grid,
+    Paper,
+    Typography,
+    TextField,
+    Button,
+    Alert,
+  } from "@mui/material";
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-
+import { paperStyle } from "./AuthStyles";
 function ConfirmPage() {
     const [code, setCode] = useState('');
     const [err, setErr] = useState('');
@@ -24,30 +31,38 @@ function ConfirmPage() {
     };
 
     return (
-        <div>
-            <div className="container">
-                <div className="errMessage">
-                    {err}
-                </div>
-                <div
-                    className="form"
-                    style={{
-                        width: "500px",
-                        height: "500px",
-                        background: "grey",
-                        margin: "auto",
-                        marginTop: "calc(100vh - 1000px)/2"
-                    }}
-                >
-                    <input
-                        type="text"
-                        value={code}
-                        onChange={handleChange}
-                    />
-                    <button onClick={handleSubmit}>Submit</button>
-                </div>
-            </div>
-        </div>
+        <Grid>
+        <Paper elevation={20} style={paperStyle}>
+          <Grid textAlign="center" marginBottom={2}>
+            <Typography variant="h5" fontWeight="bold">
+             Comfirm
+            </Typography>
+          </Grid>
+          <form onSubmit={handleSubmit}>
+            <TextField
+              fullWidth
+              name="comfirm"
+              label="Comfirm"
+              variant="standard"
+              placeholder="Comfirm"
+              onChange={handleChange}
+              value={code}
+         
+            />
+            <Grid marginTop={3}>
+              <Button
+                fullWidth
+                textAlign="center"
+                onClick={handleSubmit}
+                variant="contained"
+                color="primary"
+              >
+                Comfirm
+              </Button>
+            </Grid>
+          </form>
+        </Paper>
+      </Grid>
     );
 }
 
