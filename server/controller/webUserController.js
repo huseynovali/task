@@ -11,19 +11,19 @@ const webUserController = {
         let email = req.body?.email.toLowerCase();
         WebUser.findOne({ email: email })
             .then(data => {
-                //Öncelikle bu kullanıcı var mı check ediyorum
+              
                 if (data) {
                     res.status(500).json({ 'msg': 'Böyle bir kullanıcı mevcut' })
                 }
                 else {
-                    //bir adet confirm code generate ediyorum
+                    
 
-                    let confirmCode = Math.floor(Math.random() * 10000) // code review yapılacak. confirm code 35 de olabilir :D
+                    let confirmCode = Math.floor(Math.random() * 10000) 
 
                     let codeExpire = moment().add("59", "s")
                     const webUser = new WebUser({
                         email: email,
-                        password: req.body.password,// danger area. !!! password asla gözükmemeli. code review olacak!
+                        password: req.body.password,
                         code: confirmCode,
                         codeExpire: codeExpire
                     });
@@ -83,7 +83,7 @@ const webUserController = {
             .then(user => {
                 if (user) {
 
-                    let confirmCode = Math.floor(Math.random() * 10000) // code review yapılacak. confirm code 35 de olabilir :D
+                    let confirmCode = Math.floor(Math.random() * 10000) 
 
                     let codeExpire = moment().add("30", "s")
 
